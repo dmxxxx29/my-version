@@ -193,7 +193,6 @@ function CommandHandler:executeCommand(player, commandName, args)
 end
 
 
---[[Parse command from chat message
 function CommandHandler:parseCommand(message)
     -- Check if message starts with the command prefix
     if message:sub(1, #_G.COMMAND_PREFIX) ~= _G.COMMAND_PREFIX then
@@ -217,7 +216,7 @@ function CommandHandler:parseCommand(message)
     end
     
     return commandName, args
-end]] -- no thanks dont check it
+end
 
 -- Get list of available commands for a player
 function CommandHandler:getCommands(player)
@@ -235,6 +234,7 @@ end
 
 -- Initialize the command handler
 local commandHandler = CommandHandler.new()
+
 
 -- Handle respawning at saved position (for reset command)
 local function setupPositionRestoration()
@@ -618,10 +618,6 @@ commandHandler:registerCommand("bring", function(player, args)
     commandHandler:sendMessage(player, "Brought " .. targetPlayer.Name .. " to you")
 end, "Brings a player to you", true)
 
--- Enhanced Reset character command that maintains position
-
-
---[[Connect chat handler
 Players.PlayerAdded:Connect(function(player)
     player.Chatted:Connect(function(message)
         local commandName, args = commandHandler:parseCommand(message)
@@ -639,7 +635,8 @@ for _, player in pairs(Players:GetPlayers()) do
             commandHandler:executeCommand(player, commandName, args)
         end
     end)
-end]] -- same with this aswell
+end
+
 
 print("Command Handler System loaded successfully!")
 print("Type " .. _G.COMMAND_PREFIX .. "help for a list of available commands")
